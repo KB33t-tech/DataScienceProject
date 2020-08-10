@@ -6,6 +6,7 @@ from scipy import signal
 from scipy.fft import fft, ifft
 import seaborn
 
+#this is a script to visualize the 3 axis' and total g forces at given time point with 4 subplots
 def main(in_directory):
     xrange = 200,205
     yrange = -2.2,3.2
@@ -63,7 +64,7 @@ def main(in_directory):
     # total g force
     plt.subplot(2, 2, 4)
     plt.plot(walking_data['time'],walking_data['TgF'],'b-',label='without filtering')   
-    b, a = signal.butter(4, 0.1, btype='lowpass', analog=False)
+    b, a = signal.butter(3, 0.1, btype='lowpass', analog=False)
     low_passed = signal.filtfilt(b, a, walking_data['TgF'])
     plt.plot(walking_data['time'],low_passed,'r-',label='with filtering')
     plt.xlabel('time in seconds')
@@ -80,8 +81,9 @@ def main(in_directory):
 
     #lets try to find velocity
     positive_accel = low_passed_x[low_passed_x>0]
+    
 
-    print(tota_acceleration)
+    print(positive_accel)
 
 if __name__=='__main__':
     in_directory = sys.argv[1]
