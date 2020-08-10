@@ -78,7 +78,6 @@ def main(in_directory):
     plt.ylabel("Power Spectral Density")
     plt.title("Fourier transform with critical frequency of 0.05")
 
-
     plt.show()
   
 
