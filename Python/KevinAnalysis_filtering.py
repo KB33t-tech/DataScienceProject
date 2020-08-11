@@ -8,13 +8,13 @@ import seaborn
 
 #this is a script to visualize the 3 axis' and total g forces at given time point with 4 subplots
 def main(in_directory):
-    xrange = 200,205
+    xrange = 00,205
     yrange = -2.2,3.2
 
     seaborn.set()
     walking_data = pd.read_csv(in_directory)
     # going to be plotting 4 graphs using 4 different forces
-    plt.xlim(250,500)
+    plt.xlim(xrange)
     plt.subplot(2, 2, 1)
     #without filtering get this:
     plt.plot(walking_data['time'],walking_data['gFx'],'b-',label="without filtering")   
@@ -79,11 +79,7 @@ def main(in_directory):
     # print(walking_data)
 
 
-    #lets try to find velocity
-    positive_accel = low_passed_x[low_passed_x>0]
-    
 
-    print(positive_accel)
 
 if __name__=='__main__':
     in_directory = sys.argv[1]

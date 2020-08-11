@@ -11,14 +11,14 @@ def main(in_directory):
     seaborn.set()
     data = pd.read_csv(in_directory)
     time = data['time']
-    Freq = time.count() / time.max() #the Hz
-    T = 1/Freq
+    Freq = time.count() / time.max() #the Hz can be calculated this way
+    T = 1/Freq # T is the period
     L= int(data.shape[0])
 
     #butter fractions
     strin_but= 2/Freq
     good_but = 10/Freq
-    lax_but =  25/Freq
+    lax_but =  20/Freq
     #give columns variable names
     x = data['gFx']
     y = data['gFy']
@@ -43,7 +43,6 @@ def main(in_directory):
     filtered_x_fft = fft(filtered_x)
     filtered_X_PSD_o = abs(filtered_x_fft)
     filtered_freq = fftfreq(L,d = T)
-    filtered_i = freq>0
     plt.plot(filtered_freq[i],filtered_X_PSD_o[i])
     plt.legend(labels=('raw data','filtered'))
     plt.ylabel("Power Spectral Density")
@@ -55,7 +54,7 @@ def main(in_directory):
     plt.subplot(2,3,4)
     plt.plot(time,x,'b.')
     plt.plot(time,filtered_x,'r-')
-    plt.ylabel('acceleration in gs (1g ~= 9.8m/s^2')
+    plt.ylabel('acceleration in gs (1g ~= 9.8m/s^2)')
     plt.xlabel('time in seconds')
     plt.legend(labels=('raw','filtered'))
     plt.xlim(500,503)
@@ -69,7 +68,6 @@ def main(in_directory):
     filtered_x_fft = fft(filtered_x)
     filtered_X_PSD_o = abs(filtered_x_fft)
     filtered_freq = fftfreq(L,d = T)
-    filtered_i = freq>0
     plt.plot(filtered_freq[i],filtered_X_PSD_o[i])
     plt.legend(labels=('raw data','filtered'))
     plt.xlabel("Frequency in Hz")
@@ -80,7 +78,7 @@ def main(in_directory):
     plt.subplot(2,3,5)
     plt.plot(time,x,'b.')
     plt.plot(time,filtered_x,'r-')
-    plt.ylabel('acceleration in gs (1g ~= 9.8m/s^2')
+    plt.ylabel('acceleration in gs (1g ~= 9.8m/s^2)')
     plt.xlabel('time in seconds')
     plt.legend(labels=('raw','filtered'))
     plt.xlim(500,503)
@@ -94,7 +92,6 @@ def main(in_directory):
     filtered_x_fft = fft(filtered_x)
     filtered_X_PSD_o = abs(filtered_x_fft)
     filtered_freq = fftfreq(L,d = T)
-    filtered_i = freq>0
     plt.plot(filtered_freq[i],filtered_X_PSD_o[i])
     plt.legend(labels=('raw data','filtered'))
     plt.xlabel("Frequency in Hz")
@@ -105,7 +102,6 @@ def main(in_directory):
     plt.subplot(2,3,6)
     plt.plot(time,x,'b.')
     plt.plot(time,filtered_x,'r-')
-
     plt.xlim(500,503)
 
     plt.show()
