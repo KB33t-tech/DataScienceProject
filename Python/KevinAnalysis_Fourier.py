@@ -16,7 +16,7 @@ def main(in_directory):
     L= int(data.shape[0])
 
     #butter fractions
-    strin_but= 2/Freq
+    strin_but= 5/Freq
     good_but = 10/Freq
     lax_but =  20/Freq
     #give columns variable names
@@ -103,6 +103,9 @@ def main(in_directory):
     plt.plot(time,x,'b.')
     plt.plot(time,filtered_x,'r-')
     plt.xlim(500,503)
+    figure = plt.gcf()
+    figure.set_size_inches(8, 6)
+    figure.tight_layout()
     plt.savefig('Report_and_Figures/fourier_analysis.png')
     plt.show()
   
