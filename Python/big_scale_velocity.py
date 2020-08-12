@@ -25,6 +25,10 @@ def main(in_directory):
     Freq = time.count() / time.max() #the Hz can be calculated this way
     good_but = 10/Freq
 
+    #this code takes out data where we are standing
+    # x_acceleration['abs'] = x_acceleration['acceleration'].abs()
+    # x_acceleration = x_acceleration[x_acceleration['abs']>=.0001]
+
     # Filtering
     b, a = signal.butter(3, good_but, btype='lowpass', analog=False)
     filtered_x = signal.filtfilt(b, a, x)
@@ -44,18 +48,18 @@ def main(in_directory):
     mean = x_acceleration
     mean['time'] = mean['time']
     mean = mean.set_index('time')
-    mean = mean.rolling(math.ceil(Freq*20)).apply(integrate.trapz) #assume somewhat evenly distributed data every 1 second which is Freq
-    print(mean)
+    mean = mean.rolling(math.ceil((Freq)), center = True).mean() #assume somewhat evenly distributed data every 1 second which is Freq
     mean = mean.reset_index()
+
     x_acceleration['acceleration'] = x_acceleration['acceleration'] - mean['acceleration']
     x_acceleration = x_acceleration.dropna()
     plt.plot(x_acceleration['time'],x_acceleration['acceleration'])
-    plt.show()
+    # plt.show()
 
     # # #do some integration to get velocity, note that we run into issue of an ever increasing acceleration
     #same code as before in KevinVelocity
-    x = x_acceleration
-    start = x['time'].min()
+
+    start = x_acceleration['time'].min()
     Velocity = integrate.cumtrapz(x_acceleration['acceleration'],x_acceleration['time'],initial=start)
     plt.subplot(1,3,1)
     plt.plot(x_acceleration['time'],x_acceleration['acceleration'],'g-',label='acceleration')
