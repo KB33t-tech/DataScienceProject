@@ -16,7 +16,7 @@ def main(in_directory):
     L= int(data.shape[0])
 
     #butter fractions
-    strin_but= 5/Freq
+    strin_but= 4/Freq
     good_but = 10/Freq
     lax_but =  20/Freq
     #give columns variable names
@@ -102,11 +102,16 @@ def main(in_directory):
     plt.subplot(2,3,6)
     plt.plot(time,x,'b.')
     plt.plot(time,filtered_x,'r-')
+    plt.ylabel('acceleration in gs (1g ~= 9.8m/s^2)')
+    plt.xlabel('time in seconds')
+    plt.legend(labels=('raw','filtered'))
     plt.xlim(500,503)
+    
+    #stuff for saving
     figure = plt.gcf()
-    figure.set_size_inches(8, 6)
+    figure.set_size_inches(20, 10)
     figure.tight_layout()
-    plt.savefig('Report_and_Figures/fourier_analysis.png')
+    figure.savefig('Report_and_Figures/fourier_analysis.png',dpi=100)
     plt.show()
   
 

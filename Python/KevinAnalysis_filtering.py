@@ -76,7 +76,7 @@ def main(in_directory):
     figure = plt.gcf()
     figure.set_size_inches(8, 6)
     figure.tight_layout()
-    plt.savefig('Report_and_Figures/filtering_analysis.png')
+    plt.savefig('Report_and_Figures/filtering_analysis.png',dpi=100)
     plt.show()
 
     # print(walking_data)

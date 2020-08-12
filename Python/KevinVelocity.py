@@ -31,7 +31,7 @@ def main(in_directory):
 
     #Noticed that if window is too large method wont work so this limits window and correct for
     x_acceleration = pd.DataFrame({'time':time,'g-force':filtered_x})
-    x_acceleration = x_acceleration[x_acceleration['time']>460]
+    x_acceleration = x_acceleration[x_acceleration['time']>470]
     x_acceleration = x_acceleration[x_acceleration['time']<480]
     x_acceleration['acceleration'] = x_acceleration['g-force'].multiply(9.81)
     x_acceleration['acceleration'] = x_acceleration['acceleration']-x_acceleration['acceleration'].mean() 
@@ -44,13 +44,6 @@ def main(in_directory):
 
     x = x_acceleration
     start = x['time'].min()
-    df = pd.DataFrame()
-    df['time'] = x['time']
-    df['v'] = x_acceleration['acceleration']
-
-    df = df.set_index('time')
-
-    df = df.rolling(window = 100).apply(integrate.trapz)
 
     Velocity = integrate.cumtrapz(x_acceleration['acceleration'],x_acceleration['time'],initial=start)
     
@@ -62,7 +55,7 @@ def main(in_directory):
     plt.legend()
 
     plt.subplot(1,3,2)
-    plt.plot(df.index,df['v'],'b-',label='velocity')
+    plt.plot(x_acceleration.iloc[1:,0],Velocity[1:],'b-',label='velocity')
     plt.title('velocity over time')
     plt.xlabel('time(s)')
     plt.ylabel('velocity m/s')
