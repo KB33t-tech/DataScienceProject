@@ -103,7 +103,7 @@ def main(in_directory):
     plt.plot(time,x,'b.')
     plt.plot(time,filtered_x,'r-')
     plt.xlim(500,503)
-
+    plt.savefig('Report_and_Figures/fourier_analysis.png')
     plt.show()
   
 

@@ -73,7 +73,7 @@ def main(in_directory):
     plt.xlim(xrange)
     plt.legend(loc='upper right')
     plt.ylim(yrange)
-
+    plt.savefig('Report_and_Figures/filtering_analysis.png')
     plt.show()
 
     # print(walking_data)
