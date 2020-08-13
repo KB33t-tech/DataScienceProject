@@ -26,4 +26,4 @@ This script returns graphs all velocity and distance of individual:
 py Python/big_scale_velocity.py /Raw_data/15min_sam.csv'
 
 Script to predict the exercises based on x, y, and z forces:  
-python3 Python/Vera_ML_Exercise.py Raw_data/labelled_exercises.csv Raw_data/unlabelled_exercises.csv
+python3 Python/Vera_ML_Exercise.py Raw_data/labelled_exercises.csv Raw_data/unlabelled_exercises.csv Raw_data/
