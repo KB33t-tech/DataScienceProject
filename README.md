@@ -4,7 +4,7 @@
 - Python and Jupyter notebooks relevent to the project can be found in the Python Directory
 - running the python scripts will result in plots being saved to Report_and_Figures Directory
 
-#Requirements
+# Requirements
 - All code requires Python 3 
 - Required Libraries: numpy, pandas, matplotlib, seaborn, scipy, math, sys
 
