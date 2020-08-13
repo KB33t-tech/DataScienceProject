@@ -94,7 +94,7 @@ def create_unlabelled_data():
     unlabelled_df.to_csv('unlabelled_exercises.csv', index = False, header = True)
 
 
-def main():
+def main(out_directory):
 
     #create_labelled_data()
     #create_unlabelled_data()
@@ -124,8 +124,9 @@ def main():
     predictions = flatten_model.predict(X_unlabelled_data)
     #print(predictions)
     predictions = pd.DataFrame(data = predictions, columns = ['exercise'])
-    predictions.to_csv('prediction_output.csv', index=False)
+    predictions.to_csv(out_directory + 'prediction_output.csv', index=False)
 
 
 if __name__ == '__main__':
-    main()
+    out_directory = sys.argv[3]
+    main(out_directory)
