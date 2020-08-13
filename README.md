@@ -5,8 +5,8 @@
 - running the python scripts will result in plots being saved to Report_and_Figures Directory
 
 # Requirements
-- All code requires Python 3 
-- Required Libraries: numpy, pandas, matplotlib, seaborn, scipy, math, sys
+- All code requires Python 3 and Jupyter Notebook
+- Required Libraries: numpy, pandas, matplotlib, seaborn, scipy, sklearn, math, sys
 
 # Running the Pipeline
 After cloning this git move to the Project Directory if you are not already there.
@@ -24,3 +24,6 @@ py Python/KevinVelocity.py /Raw_data/15min_sam.csv'
 
 This script returns graphs all velocity and distance of individual:
 py Python/big_scale_velocity.py /Raw_data/15min_sam.csv'
+
+Script to predict the exercises based on x, y, and z forces:
+python3 Python/Vera_ML_Exercise.py Raw_data/labelled_exercises.csv Raw_data/unlabelled_exercises.csv
