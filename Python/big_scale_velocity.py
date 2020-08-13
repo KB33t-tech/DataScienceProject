@@ -16,7 +16,7 @@ def main(in_directory):
 
     #give columns variable names
     time = data['time']
-    x = data['gFx']
+    x = data['gFx']*-1
 
     #useful values for filtering
     Freq = time.count() / time.max() #the Hz can be calculated this way
@@ -33,7 +33,8 @@ def main(in_directory):
     #code for limiting time window when experimenting
     # x_acceleration = x_acceleration[x_acceleration['time']>60*1]
     # endtime = x_acceleration['time'].max()
-    # x_acceleration = x_acceleration[x_acceleration['time']<600]
+    x_acceleration = x_acceleration[x_acceleration['time']>479]
+    x_acceleration = x_acceleration[x_acceleration['time']<480]
    
     #this time i need to calculate the rolling mean with 
     mean = x_acceleration
@@ -43,18 +44,20 @@ def main(in_directory):
     # hope is to reduce outliers like standing from habing influence on data
 
     # mean = mean.rolling(math.ceil((Freq)),win_type='triang',closed='both',center=True).mean() #chose freq for window cause figure it is around 1 to 2 seconds
-    mean = mean.rolling(math.ceil((Freq)),win_type='blackmanharris',closed='both').mean()
-    print(mean)
+    mean = mean.rolling(math.ceil((1))).mean()
     mean = mean.reset_index()
-
-    x_acceleration['acceleration'] = x_acceleration['acceleration'] - mean['acceleration']
-    x_acceleration = x_acceleration.dropna()
-    plt.plot(x_acceleration['time'],x_acceleration['acceleration'])
+    print(mean)
+    print(x_acceleration)
+    # x_acceleration['acceleration'] = x_acceleration['acceleration'] - mean['acceleration'] #comment this out to see initial issues
+    print(x_acceleration)
+    # x_acceleration = x_acceleration.dropna()
+    # print(x_acceleration)
+    # #This Section used to look at differences in mean adjustment 
+    # plt.plot(x_acceleration['time'],x_acceleration['acceleration'])
+    # mean = mean.dropna()
+    # plt.plot(x_acceleration['time'],mean['acceleration'])
     # plt.show()
-
-    #seeing if I can do rolling integration here
-    vel = x_acceleration
-    vel = vel.set_index('time')
+    # print(mean)
 
     # # #do some integration to get velocity, note that we run into issue of an ever increasing acceleration
     #same code as before in KevinVelocity

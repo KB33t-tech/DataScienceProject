@@ -3,11 +3,11 @@
 - Data was collected using cellphones running Physics Toolbox Sensor Suite and can be found in the file Raw Data file
 - Python and Jupyter notebooks relevent to the project can be found in the Python Directory
 - running the python scripts will result in plots being saved to Report_and_Figures Directory
-
+----
 # Requirements
 - All code requires Python 3 and Jupyter Notebook
 - Required Libraries: numpy, pandas, matplotlib, seaborn, scipy, sklearn, math, sys
-
+----
 # Running the Pipeline
 After cloning this git move to the Project Directory if you are not already there.  
 While in the Project Directory running the following commands will output plots
