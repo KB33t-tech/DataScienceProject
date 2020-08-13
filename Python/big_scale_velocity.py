@@ -14,20 +14,13 @@ def main(in_directory):
     data = pd.read_csv(in_directory)
     seaborn.set()
 
-    # print(data)
     #give columns variable names
     time = data['time']
-    x = data['gFx'] 
-    # print(data)
-    # total = data['']
+    x = data['gFx']
 
     #useful values for filtering
     Freq = time.count() / time.max() #the Hz can be calculated this way
     good_but = 10/Freq
-
-    #this code takes out data where we are standing
-    # x_acceleration['abs'] = x_acceleration['acceleration'].abs()
-    # x_acceleration = x_acceleration[x_acceleration['abs']>=.0001]
 
     # Filtering
     b, a = signal.butter(3, good_but, btype='lowpass', analog=False)
@@ -36,25 +29,32 @@ def main(in_directory):
     #Noticed that if window is too large method wont work so this limits window and correct for
     x_acceleration = pd.DataFrame({'time':time,'g-force':filtered_x})
     x_acceleration['acceleration'] = x_acceleration['g-force'].multiply(9.81)
-
-    #still going to remove first and last 3 mins cause they are likely me trying to setup and stop app
     
-    #code for limiting window when experimenting
+    #code for limiting time window when experimenting
     # x_acceleration = x_acceleration[x_acceleration['time']>60*1]
     # endtime = x_acceleration['time'].max()
     # x_acceleration = x_acceleration[x_acceleration['time']<600]
    
     #this time i need to calculate the rolling mean with 
     mean = x_acceleration
-    mean['time'] = mean['time']
     mean = mean.set_index('time')
-    mean = mean.rolling(math.ceil((Freq)), center = True).mean() #assume somewhat evenly distributed data every 1 second which is Freq
+    #Ended up choosing triangle filter because works nicely and we know our data is slightly skewed but I believe close numbers represent avg
+    #better than the numbers further away
+    # hope is to reduce outliers like standing from habing influence on data
+
+    # mean = mean.rolling(math.ceil((Freq)),win_type='triang',closed='both',center=True).mean() #chose freq for window cause figure it is around 1 to 2 seconds
+    mean = mean.rolling(math.ceil((Freq)),win_type='blackmanharris',closed='both').mean()
+    print(mean)
     mean = mean.reset_index()
 
     x_acceleration['acceleration'] = x_acceleration['acceleration'] - mean['acceleration']
     x_acceleration = x_acceleration.dropna()
     plt.plot(x_acceleration['time'],x_acceleration['acceleration'])
     # plt.show()
+
+    #seeing if I can do rolling integration here
+    vel = x_acceleration
+    vel = vel.set_index('time')
 
     # # #do some integration to get velocity, note that we run into issue of an ever increasing acceleration
     #same code as before in KevinVelocity
@@ -83,11 +83,11 @@ def main(in_directory):
     plt.xlabel('time(s)')
     plt.ylabel('distance m')
     plt.legend()
-    # plt.show()
     figure = plt.gcf()
     figure.set_size_inches(8, 6)
     figure.tight_layout()
     figure.savefig('Report_and_Figures/vel_dist_long.png',dpi=100)
+    plt.show()
 
 if __name__=='__main__':
     in_directory = sys.argv[1]

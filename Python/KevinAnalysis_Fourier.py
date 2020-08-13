@@ -16,11 +16,11 @@ def main(in_directory):
     L= int(data.shape[0])
 
     #butter fractions
-    strin_but= 4/Freq
+    strin_but= 5/Freq
     good_but = 10/Freq
     lax_but =  20/Freq
     #give columns variable names
-    x = data['gFx']
+    x = data['gFx']*-1
     y = data['gFy']
     z = data['gFz']
     total = data['TgF'] 
@@ -112,7 +112,7 @@ def main(in_directory):
     figure.set_size_inches(20, 10)
     figure.tight_layout()
     figure.savefig('Report_and_Figures/fourier_analysis.png',dpi=100)
-    plt.show()
+    # plt.show()
   
 
 if __name__=='__main__':

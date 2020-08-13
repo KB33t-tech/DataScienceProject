@@ -17,8 +17,9 @@ def main(in_directory):
     # print(data)
     #give columns variable names
     time = data['time']
-    x = data['gFx'] 
-    # print(data)
+    x = data['gFx']
+    print(data)
+    # print(x)
     # total = data['']
 
     #useful values
@@ -31,12 +32,12 @@ def main(in_directory):
 
     #Noticed that if window is too large method wont work so this limits window and correct for
     x_acceleration = pd.DataFrame({'time':time,'g-force':filtered_x})
-    x_acceleration = x_acceleration[x_acceleration['time']>470]
-    x_acceleration = x_acceleration[x_acceleration['time']<480]
+    x_acceleration = x_acceleration[x_acceleration['time']>488]
+    x_acceleration = x_acceleration[x_acceleration['time']<490]
     x_acceleration['acceleration'] = x_acceleration['g-force'].multiply(9.81)
-    x_acceleration['acceleration'] = x_acceleration['acceleration']-x_acceleration['acceleration'].mean() 
+    x_acceleration['acceleration'] = x_acceleration['acceleration']-x_acceleration['acceleration'].mean()
 
-    # print(x_acceleration['acceleration'].mean())
+    print(x_acceleration['acceleration'].mean())
     plt.plot(x_acceleration['time'],x_acceleration['acceleration'])
 
 
@@ -69,11 +70,11 @@ def main(in_directory):
     plt.xlabel('time(s)')
     plt.ylabel('distance m')
     plt.legend()
-    # plt.show()
     figure = plt.gcf()
     figure.set_size_inches(8, 6)
     figure.tight_layout()
     plt.savefig('Report_and_Figures/vel_dist_short.png',dpi=100)
+    plt.show()
 
 if __name__=='__main__':
     in_directory = sys.argv[1]
