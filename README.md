@@ -1,12 +1,16 @@
-# Background Information and Requirements
+# Background Information on project and repository
 
 - Data was collected using cellphones running Physics Toolbox Sensor Suite and can be found in the file Raw Data file
+- Python and Jupyter notebooks relevent to the project can be found in the Python Directory
+- running the python scripts will result in plots being saved to Report_and_Figures Directory
 
+#Requirements
 - All code requires Python 3 
 - Required Libraries: numpy, pandas, matplotlib, seaborn, scipy, math, sys
 
 # Running the Pipeline
-While in the Project Directory runnin the following commands will output plots
+After cloning this git move to the Project Directory if you are not already there.
+While in the Project Directory running the following commands will output plots
 into the Report_and_Figures Directory:
 
 Script to determine best Butterworth via Fourier:
