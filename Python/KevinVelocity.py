@@ -17,7 +17,7 @@ def main(in_directory):
     # print(data)
     #give columns variable names
     time = data['time']
-    x = data['gFx']
+    x = data['gFx'] * -1
     print(data)
     # print(x)
     # total = data['']
@@ -32,8 +32,8 @@ def main(in_directory):
 
     #Noticed that if window is too large method wont work so this limits window and correct for
     x_acceleration = pd.DataFrame({'time':time,'g-force':filtered_x})
-    x_acceleration = x_acceleration[x_acceleration['time']>488]
-    x_acceleration = x_acceleration[x_acceleration['time']<490]
+    x_acceleration = x_acceleration[x_acceleration['time']>470]
+    x_acceleration = x_acceleration[x_acceleration['time']<480]
     x_acceleration['acceleration'] = x_acceleration['g-force'].multiply(9.81)
     x_acceleration['acceleration'] = x_acceleration['acceleration']-x_acceleration['acceleration'].mean()
 

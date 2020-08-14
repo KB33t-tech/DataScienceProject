@@ -31,27 +31,19 @@ def main(in_directory):
     x_acceleration['acceleration'] = x_acceleration['g-force'].multiply(9.81)
     
     #code for limiting time window when experimenting
-    # x_acceleration = x_acceleration[x_acceleration['time']>60*1]
-    # endtime = x_acceleration['time'].max()
-    x_acceleration = x_acceleration[x_acceleration['time']>479]
-    x_acceleration = x_acceleration[x_acceleration['time']<480]
+
+    # x_acceleration = x_acceleration[x_acceleration['time']>479]
+    # x_acceleration = x_acceleration[x_acceleration['time']<480]
    
     #this time i need to calculate the rolling mean with 
     mean = x_acceleration
     mean = mean.set_index('time')
-    #Ended up choosing triangle filter because works nicely and we know our data is slightly skewed but I believe close numbers represent avg
-    #better than the numbers further away
-    # hope is to reduce outliers like standing from habing influence on data
-
-    # mean = mean.rolling(math.ceil((Freq)),win_type='triang',closed='both',center=True).mean() #chose freq for window cause figure it is around 1 to 2 seconds
-    mean = mean.rolling(math.ceil((1))).mean()
+    mean = mean.rolling(math.ceil((Freq))).mean()
     mean = mean.reset_index()
-    print(mean)
+    x_acceleration['acceleration'] = x_acceleration['acceleration'] - mean['acceleration'] #comment this out to see initial issues
+    x_acceleration = x_acceleration.dropna()
     print(x_acceleration)
-    # x_acceleration['acceleration'] = x_acceleration['acceleration'] - mean['acceleration'] #comment this out to see initial issues
-    print(x_acceleration)
-    # x_acceleration = x_acceleration.dropna()
-    # print(x_acceleration)
+    
     # #This Section used to look at differences in mean adjustment 
     # plt.plot(x_acceleration['time'],x_acceleration['acceleration'])
     # mean = mean.dropna()
