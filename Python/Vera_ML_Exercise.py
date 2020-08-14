@@ -71,7 +71,7 @@ def main():
     plt.xlabel('x')
     plt.ylabel('y')
     plt.title('Clusters of Similar Exercise Observations')
-    plt.show()
+    #plt.show()
     #plt.savefig('Cluster_Exercise')
 
     df = pd.DataFrame({
